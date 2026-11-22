@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=68.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pqblocks-tls"
+version = "0.1.0"
+description = "Post-quantum hybrid TLS 1.3 handshake fuzzer and verification harness (X25519 + ML-KEM-768)."
+readme = "README.md"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "Govind Dubey", email = "govinddubeycse@gmail.com"}
+]
+maintainers = [
+    {name = "Govind Dubey", email = "govinddubeycse@gmail.com"}
+]
+requires-python = ">=3.10"
+keywords = [
+    "post-quantum",
+    "pqc",
+    "tls",
+    "ml-kem",
+    "x25519",
+    "fuzzer",
+    "fips-203",
+    "rfc-8446",
+    "cryptography",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Security :: Cryptography",
+    "Topic :: Software Development :: Testing",
+]
+dependencies = [
+    "cryptography>=50.0.1",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8.0.0",
+]
+
+[project.urls]
+Homepage = "https://pqblocks.github.io"
+Documentation = "https://pqblocks.github.io"
+Repository = "https://github.com/PQBlocks/tls-hybrid-fuzzer"
+Issues = "https://github.com/PQBlocks/tls-hybrid-fuzzer/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["pqblocks_tls"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

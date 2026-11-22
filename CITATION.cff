@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "pqblocks-tls"
+version: "0.1.0"
+license: Apache-2.0
+repository-code: "https://github.com/PQBlocks/tls-hybrid-fuzzer"
+authors:
+  - name: "Govind Dubey"
+    email: "govinddubeycse@gmail.com"
+  - name: "The PQBlocks Authors"
+keywords:
+  - post-quantum
+  - pqc
+  - tls
+  - ml-kem
+  - x25519
+  - fuzzer
+abstract: "Post-quantum hybrid TLS 1.3 handshake fuzzer and verification harness (X25519 + ML-KEM-768)"
