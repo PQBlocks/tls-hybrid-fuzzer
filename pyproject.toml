@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pqblocks-tls"
-version = "0.1.0"
+version = "0.2.0"
 description = "Post-quantum hybrid TLS 1.3 handshake fuzzer and verification harness (X25519 + ML-KEM-768)."
 readme = "README.md"
 license = {text = "Apache-2.0"}
@@ -45,6 +45,12 @@ dependencies = [
     "cryptography>=50.0.1",
 ]
 
+[project.scripts]
+pqblocks-tlsfuzz = "pqblocks_tlsfuzz.cli:main"
+
+[project.entry-points."pytest11"]
+pqblocks-tlsfuzz = "pqblocks_tlsfuzz.adapters.pytest_plugin"
+
 [project.optional-dependencies]
 test = [
     "pytest>=8.0.0",
@@ -58,7 +64,10 @@ Issues = "https://github.com/PQBlocks/tls-hybrid-fuzzer/issues"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
-packages = ["pqblocks_tls"]
+packages = ["pqblocks_tls", "pqblocks_tlsfuzz"]
+
+[tool.setuptools.package-data]
+pqblocks_tlsfuzz = ["py.typed"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

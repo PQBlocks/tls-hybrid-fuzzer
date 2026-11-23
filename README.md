@@ -116,6 +116,23 @@ Immutable result container returned by `fuzz_tls_handshake`.
 
 ---
 
+## Command-Line Interface (`pqblocks-tlsfuzz`)
+
+`pqblocks-tls` includes the `pqblocks-tlsfuzz` command-line tool for wire-level mutation testing and fuzzing of TLS 1.3 ClientHello key shares across 6 post-quantum and hybrid groups (`X25519MLKEM768`, `SecP256r1MLKEM768`, `MLKEM512`, `MLKEM768`, `MLKEM1024`, `X25519`) using 13 mutation classes.
+
+```bash
+# Verify local runtime and post-quantum group support
+pqblocks-tlsfuzz doctor
+
+# Stream deterministically generated test cases as JSONL
+pqblocks-tlsfuzz corpus --group X25519MLKEM768 --limit 10
+
+# Execute mutation fuzzing against a live target
+pqblocks-tlsfuzz fuzz --host localhost --port 8443 --group X25519MLKEM768 --count 100 --seed 42
+```
+
+---
+
 ## Testing & Verification
 
 Run the test suite via pytest:
