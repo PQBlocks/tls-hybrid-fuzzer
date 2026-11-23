@@ -20,7 +20,7 @@ Open a private report under GitHub Security Advisories:
 
 ### 2. Direct Author Contact
 If you cannot use GitHub Advisories, please contact the maintainer directly:  
-- **Author:** Govind Dubey (`govinddubeycse@gmail.com`)
+- **Author:** Govind Dubey (`govinddubeycse+pqblocks@gmail.com`)
 - **Issue Tracker:** [https://github.com/PQBlocks/tls-hybrid-fuzzer/issues](https://github.com/PQBlocks/tls-hybrid-fuzzer/issues)
 
 Please avoid posting unredacted exploit payloads or sensitive key material in public issue threads.

@@ -147,7 +147,7 @@ See **[TESTING.md](TESTING.md)** and **[VERIFICATION_REPORT.md](VERIFICATION_REP
 
 ## Author & Maintainers
 
-- **Govind Dubey** ([govinddubeycse@gmail.com](mailto:govinddubeycse@gmail.com))
+- **Govind Dubey** ([govinddubeycse+pqblocks@gmail.com](mailto:govinddubeycse+pqblocks@gmail.com))
 - **The PQBlocks Authors** ([https://github.com/PQBlocks](https://github.com/PQBlocks))
 
 ---
