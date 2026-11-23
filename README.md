@@ -28,6 +28,66 @@ Modern cryptographic migrations to post-quantum standards require hybrid key est
 
 ---
 
+## Architecture & Fuzzing Pipeline
+
+```mermaid
+flowchart TD
+    subgraph Groups["Supported Key Exchange Groups"]
+        G1["X25519MLKEM768 (Hybrid 0x11ec)"]
+        G2["SecP256r1MLKEM768 (Hybrid 0x11ed)"]
+        G3["ML-KEM-512 / 768 / 1024 (Pure PQ)"]
+        G4["X25519 (Classical Baseline)"]
+    end
+
+    subgraph Mutations["13 Mutation Classes"]
+        M1["Wire Encodings: Short / Overlong / Zeroed Shares"]
+        M2["Lattice Deformations: Modulus Overflow / Bitflips"]
+        M3["Protocol Faults: Missing Extension / Duplicate Groups"]
+    end
+
+    subgraph Engine["Fuzzing & Verification Engine"]
+        FuzzCore["Fuzzer Engine (Deterministic Seed)"]
+        Transport["TLS Socket & Transport Layer"]
+        Oracle["Differential Oracle & Latency Guard"]
+    end
+
+    subgraph Telemetry["Reports & CI/CD Adapters"]
+        Rep1["OpenTelemetry Spans"]
+        Rep2["GitHub Actions Annotations"]
+        Rep3["GitLab CI Reports & JSONL Stream"]
+    end
+
+    Groups --> FuzzCore
+    Mutations --> FuzzCore
+    FuzzCore --> Transport
+    Transport --> Oracle
+    Oracle --> Telemetry
+```
+
+### Handshake Interaction Flow
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Client as pqblocks-tlsfuzz
+    participant Server as Target TLS 1.3 Server
+
+    Note over Client,Server: Phase 1: ClientHello Mutation
+    Client->>Client: Generate Key Share (X25519 + ML-KEM-768)
+    Client->>Client: Apply Mutation (Truncation, Bit-Flip, Malformed Poly, Padding)
+    Client->>Server: ClientHello (Mutated KeyShare Extension)
+
+    alt Expected Clean Rejection (Pass)
+        Server-->>Client: TLS Alert: Illegal Parameter / Decrypt Error
+        Client->>Client: Verify Error Taxonomy & Latency Budget
+    else Connection Hang or Crash (Vulnerability Detected)
+        Server--xClient: Connection Reset or Timeout
+        Client->>Client: Capture Diagnostic Crash Report & Seed Artifact
+    end
+```
+
+---
+
 ## Installation
 
 Install the package via pip:
